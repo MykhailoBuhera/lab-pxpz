@@ -17,7 +17,7 @@ static string Popav(int x, int y, int R)
             return "na mezhi kolo";
         }
         else
-        {
+        { 
             return "Popav kolo";
         }
     }
