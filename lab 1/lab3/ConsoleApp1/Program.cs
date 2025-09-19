@@ -1,85 +1,87 @@
 ﻿using System;
+
 class Program
 {
     static bool IsValid(int x, int y) => x >= 1 && x <= 8 && y >= 1 && y <= 8;
 
-    static bool KingAttacks(int kx, int ky, int tx, int ty)
-    {
-        return Math.Abs(kx - tx) <= 1 && Math.Abs(ky - ty) <= 1;
-    }
-
-    static bool KnightAttacks(int nx, int ny, int tx, int ty)
-    {
-        int dx = Math.Abs(nx - tx);
-        int dy = Math.Abs(ny - ty);
-        return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
-    }
-
-    static bool BishopAttacks(int bx, int by, int tx, int ty)
-    {
-        return Math.Abs(bx - tx) == Math.Abs(by - ty);
-    }
+    static bool RookAttacks(int rx, int ry, int tx, int ty) => rx == tx || ry == ty;
+    static bool BishopAttacks(int bx, int by, int tx, int ty) => Math.Abs(bx - tx) == Math.Abs(by - ty);
 
     static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        // Ввід координат
-        Console.WriteLine("Введіть координати білого короля (x y):");
-        if (!ReadTwoInts(out int kx, out int ky) || !IsValid(kx, ky))
-        {
-            Console.WriteLine("Некоректні координати короля.");
-            return;
-        }
+        Console.WriteLine("Введіть координати білого туру №1 (x y):");
+        if (!ReadTwoInts(out int r1x, out int r1y) || !IsValid(r1x, r1y)) { Console.WriteLine("Некоректні координати."); return; }
 
-        Console.WriteLine("Введіть координати чорного коня (x y):");
-        if (!ReadTwoInts(out int nx, out int ny) || !IsValid(nx, ny))
-        {
-            Console.WriteLine("Некоректні координати коня.");
-            return;
-        }
+        Console.WriteLine("Введіть координати білого туру №2 (x y):");
+        if (!ReadTwoInts(out int r2x, out int r2y) || !IsValid(r2x, r2y)) { Console.WriteLine("Некоректні координати."); return; }
 
-        Console.WriteLine("Введіть координати чорного слона (x y):");
-        if (!ReadTwoInts(out int bx, out int by) || !IsValid(bx, by))
-        {
-            Console.WriteLine("Некоректні координати слона.");
-            return;
-        }
+        Console.WriteLine("Введіть координати чорного слона №1 (x y):");
+        if (!ReadTwoInts(out int b1x, out int b1y) || !IsValid(b1x, b1y)) { Console.WriteLine("Некоректні координати."); return; }
 
-        if ((kx == nx && ky == ny) || (kx == bx && ky == by) || (nx == bx && ny == by))
+        Console.WriteLine("Введіть координати чорного слона №2 (x y):");
+        if (!ReadTwoInts(out int b2x, out int b2y) || !IsValid(b2x, b2y)) { Console.WriteLine("Некоректні координати."); return; }
+
+        // Перевірка, чи всі фігури на різних клітинках
+        if ((r1x == r2x && r1y == r2y) || (r1x == b1x && r1y == b1y) || (r1x == b2x && r1y == b2y) ||
+            (r2x == b1x && r2y == b1y) || (r2x == b2x && r2y == b2y) ||
+            (b1x == b2x && b1y == b2y))
         {
             Console.WriteLine("Помилка: дві фігури на одній клітинці!");
             return;
         }
 
-        // Хід короля
-        if (KingAttacks(kx, ky, nx, ny))
-            Console.WriteLine("Білий король здійснює напад на чорного коня.");
-        else if (KingAttacks(kx, ky, bx, by))
-            Console.WriteLine("Білий король здійснює напад на чорного слона.");
-        else if ((KnightAttacks(nx, ny, kx, ky) && KingAttacks(kx, ky, bx, by)) ||
-                 (BishopAttacks(bx, by, kx, ky) && KingAttacks(kx, ky, nx, ny)))
-            Console.WriteLine("Білий король здійснює захист.");
-        else
-            Console.WriteLine("Білий король робить простий хід.");
+        // Предобчислюємо атаки
+        bool r1_att_b1 = RookAttacks(r1x, r1y, b1x, b1y);
+        bool r1_att_b2 = RookAttacks(r1x, r1y, b2x, b2y);
+        bool r2_att_b1 = RookAttacks(r2x, r2y, b1x, b1y);
+        bool r2_att_b2 = RookAttacks(r2x, r2y, b2x, b2y);
 
-        // Хід коня
-        if (KnightAttacks(nx, ny, kx, ky))
-            Console.WriteLine("Чорний кінь здійснює напад на білого короля.");
-        else if (KnightAttacks(nx, ny, bx, by))
-            Console.WriteLine("Чорний кінь здійснює напад на чорного слона.");
-        else
-            Console.WriteLine("Чорний кінь робить простий хід.");
+        bool b1_att_r1 = BishopAttacks(b1x, b1y, r1x, r1y);
+        bool b1_att_r2 = BishopAttacks(b1x, b1y, r2x, r2y);
+        bool b2_att_r1 = BishopAttacks(b2x, b2y, r1x, r1y);
+        bool b2_att_r2 = BishopAttacks(b2x, b2y, r2x, r2y);
 
-        // Хід слона
-        if (BishopAttacks(bx, by, kx, ky))
-            Console.WriteLine("Чорний слон здійснює напад на білого короля.");
-        else if (BishopAttacks(bx, by, nx, ny))
-            Console.WriteLine("Чорний слон здійснює напад на чорного коня.");
-        else if (KnightAttacks(nx, ny, kx, ky) && BishopAttacks(bx, by, nx, ny))
-            Console.WriteLine("Чорний слон здійснює захист.");
+        // --- Білий тура №1: пріоритет захисту > напад > простий хід
+        if ((b1_att_r2 && r1_att_b1) || (b2_att_r2 && r1_att_b2))
+            Console.WriteLine("Білий тура №1 здійснює захист.");
+        else if (r1_att_b1)
+            Console.WriteLine("Білий тура №1 здійснює напад на чорного слона №1.");
+        else if (r1_att_b2)
+            Console.WriteLine("Білий тура №1 здійснює напад на чорного слона №2.");
         else
-            Console.WriteLine("Чорний слон робить простий хід.");
+            Console.WriteLine("Білий тура №1 робить простий хід.");
+
+        // --- Білий тура №2
+        if ((b1_att_r1 && r2_att_b1) || (b2_att_r1 && r2_att_b2))
+            Console.WriteLine("Білий тура №2 здійснює захист.");
+        else if (r2_att_b1)
+            Console.WriteLine("Білий тура №2 здійснює напад на чорного слона №1.");
+        else if (r2_att_b2)
+            Console.WriteLine("Білий тура №2 здійснює напад на чорного слона №2.");
+        else
+            Console.WriteLine("Білий тура №2 робить простий хід.");
+
+        // --- Чорний слон №1
+        if ((r1_att_b2 && b1_att_r1) || (r2_att_b2 && b1_att_r2))
+            Console.WriteLine("Чорний слон №1 здійснює захист.");
+        else if (b1_att_r1)
+            Console.WriteLine("Чорний слон №1 здійснює напад на білу туру №1.");
+        else if (b1_att_r2)
+            Console.WriteLine("Чорний слон №1 здійснює напад на білу туру №2.");
+        else
+            Console.WriteLine("Чорний слон №1 робить простий хід.");
+
+        // --- Чорний слон №2
+        if ((r1_att_b1 && b2_att_r1) || (r2_att_b1 && b2_att_r2))
+            Console.WriteLine("Чорний слон №2 здійснює захист.");
+        else if (b2_att_r1)
+            Console.WriteLine("Чорний слон №2 здійснює напад на білу туру №1.");
+        else if (b2_att_r2)
+            Console.WriteLine("Чорний слон №2 здійснює напад на білу туру №2.");
+        else
+            Console.WriteLine("Чорний слон №2 робить простий хід.");
     }
 
     static bool ReadTwoInts(out int a, out int b)
