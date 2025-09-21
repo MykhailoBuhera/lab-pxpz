@@ -46,12 +46,40 @@ void displayArray(int[][]? array)
     }
 }
 
+void numbersOFpositive_elements(int[][]? array)
+{
+    int[] arrCount = new int[array?.Length ?? 0];
+    if (array == null || array.Length == 0)
+    {
+        Console.WriteLine("(empty array)");
+        return;
+    }
+    for (int i = 0; i < array.Length; i++)
+    {
+        int rows = array[i]?.Length ?? 0;
+        int count = 0;
+        for (int j = 0; j < rows; j++)
+        {
+            if (array[i][j] > 0 && array[i][j] > 0)
+            {
+                count++;
+                arrCount[i] = count;
+            }
+        }
+    }
+    Console.WriteLine("Numbers of positive elements in each row: ");
+    for (int i = 0; i < arrCount.Length; i++)
+    {
+        Console.Write(arrCount[i] + " ");
+    }
+}
+
 void main()
 {
-    /*
+    
     var jagged = generatejaggedArr();
-    displayArray(jagged);*/
-    displayArray(generatejaggedArr());
+    displayArray(jagged);
+    numbersOFpositive_elements(jagged);
 }
 
 main();
