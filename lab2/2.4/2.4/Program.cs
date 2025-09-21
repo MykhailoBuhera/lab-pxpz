@@ -51,7 +51,7 @@ void main()
     /*
     var jagged = generatejaggedArr();
     displayArray(jagged);*/
-    
+    displayArray(generatejaggedArr());
 }
 
 main();
