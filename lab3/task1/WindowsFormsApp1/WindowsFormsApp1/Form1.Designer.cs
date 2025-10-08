@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(180, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Vvedit znach masuvy (bykvu)";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 

@@ -8,3 +8,4 @@ C:\labu\lab-pxpz\lab3\task1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsF
 C:\labu\lab-pxpz\lab3\task1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 C:\labu\lab-pxpz\lab3\task1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\labu\lab-pxpz\lab3\task1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\labu\lab-pxpz\lab3\task1\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe.config
