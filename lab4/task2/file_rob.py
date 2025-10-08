@@ -39,7 +39,7 @@ def find_sequencu():
         with open("TF_1.txt", "r") as file:
             content = file.read()
 
-        pattern = r'\d{3,}'
+        pattern = r"\d{2,}"
         matches = re.findall(pattern, content)
 
         if matches:
