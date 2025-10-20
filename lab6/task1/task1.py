@@ -109,7 +109,7 @@ class PersonApp:
         min_age_str = self.min_age_entry.get()
         max_age_str = self.max_age_entry.get()
 
-        # Input validation
+        # perevirku na pomulku
         if not min_age_str.isdigit() or not max_age_str.isdigit():
             messagebox.showerror("Помилка вводу", "Будь ласка, введіть коректні числові значення для віку.")
             return
@@ -121,7 +121,6 @@ class PersonApp:
             messagebox.showwarning("Помилка вводу", "Мінімальний вік не може бути більшим за максимальний.")
             return
 
-        # Perform search and display results
         self.results_text.config(state=tk.NORMAL)
         self.results_text.delete('1.0', tk.END)
         
