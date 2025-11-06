@@ -20,7 +20,7 @@ def calculate_schedule():
             messagebox.showwarning("Кількість процедур має бути більшою за 1")
             return
 
-        # 2. Конвертуємо рядки з часом у об'єкти datetime
+        # Конвертуємо рядки з часом у об'єкти datetime
         time_format = "%H:%M:%S"
         start_time = datetime.strptime(start_time_str, time_format)
         next_time = datetime.strptime(next_time_str, time_format)
@@ -51,7 +51,7 @@ def calculate_schedule():
             "Кількість процедур має бути цілим числом."
         )
     except Exception as e:
-        # ше якась обробка на невідомі помил
+        # невідомі помил
         messagebox.showerror("Невідома помилка", f"Сталася помилка: {e}")
 
 
