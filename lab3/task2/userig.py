@@ -2,7 +2,7 @@ import re
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 
-# Регулярний вираз для IP-адрес (з перевіркою діапазону 0–255)
+
 IP_REGEX = r'\b(?:(?:25[0-5]|2[0-4]\d|1?\d{1,2})\.){3}(?:25[0-5]|2[0-4]\d|1?\d{1,2})\b'
 
 def find_ips():
@@ -34,7 +34,7 @@ def replace_ip():
     new_ip = simpledialog.askstring("Заміна", f"Введіть нове значення для {ip}:")
     if not new_ip:
         return
-    # Перевіряємо чи нове значення - правильна IP-адреса
+    # perevirka ip
     if not re.fullmatch(IP_REGEX, new_ip):
         messagebox.showerror("Помилка", "Некоректна IP-адреса")
         return
@@ -44,15 +44,12 @@ def replace_ip():
     text_box.insert(tk.END, new_text)
     find_ips()
 
-# --- Інтерфейс ---
 root = tk.Tk()
 root.title("IP Finder")
 
-# Текстове поле
 text_box = tk.Text(root, width=60, height=10)
 text_box.pack(pady=10)
 
-# Кнопки
 btn_frame = tk.Frame(root)
 btn_frame.pack()
 
@@ -65,7 +62,7 @@ btn_delete.grid(row=0, column=1, padx=5)
 btn_replace = tk.Button(btn_frame, text="Замінити IP", command=replace_ip)
 btn_replace.grid(row=0, column=2, padx=5)
 
-# Список знайдених IP
+# spusok IP
 result_box = tk.Listbox(root, width=40, height=10)
 result_box.pack(pady=10)
 

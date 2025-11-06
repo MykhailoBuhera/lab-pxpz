@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
             const int ROWS = 100; 
             string[,] data = new string[ROWS, COLS];
             int rowCount = 0;
-            string filePath = " C:\\labu\\lab-pxpz\\lab4\\task1\\WindowsFormsApp1\\WindowsFormsApp1\\File.txt "; // Замініть на фактичний шлях до файлу
+            string filePath = " C:\\labu\\lab-pxpz\\lab4\\task1\\WindowsFormsApp1\\WindowsFormsApp1\\File.txt "; 
             string result = "C:\\labu\\lab-pxpz\\lab4\\task1\\WindowsFormsApp1\\WindowsFormsApp1\\Data.txt";
             
             try
