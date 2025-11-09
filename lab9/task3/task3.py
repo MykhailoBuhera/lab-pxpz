@@ -11,7 +11,6 @@ def check_balance_logic(expression: str) -> str:
     pairs = []
     is_balanced = True
     
-    # Рядок для збору помилок
     error_message = ""
 
     for i, char in enumerate(expression):
@@ -58,7 +57,7 @@ def on_analyze_button_click():
     Ця функція викликається при натискані на кнопку aналізувати
     Вона зчитує фай викликає логіку та виводить результат у текстове поле.
     """
-    filepath = entry_filepath.get()
+    filepath = "task3/input.txt"
     
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
@@ -79,7 +78,6 @@ def on_analyze_button_click():
     text_output.config(state=tk.DISABLED) 
 
 
-# --- Налаштування головного вікна GUI ---
 window = tk.Tk()
 window.title("Перевірка балансу дужок")
 window.geometry("500x350")
@@ -87,13 +85,6 @@ window.geometry("500x350")
 # --- Створення віджетів ---
 frame_input = tk.Frame(window)
 frame_input.pack(pady=10)
-
-label_filepath = tk.Label(frame_input, text="Шлях до файлу:")
-label_filepath.pack(side=tk.LEFT, padx=5)
-
-entry_filepath = tk.Entry(frame_input, width=40)
-entry_filepath.insert(0, "expression.txt") 
-entry_filepath.pack(side=tk.LEFT)
 
 button_analyze = tk.Button(window, text="Аналізувати", command=on_analyze_button_click)
 button_analyze.pack(pady=10)
