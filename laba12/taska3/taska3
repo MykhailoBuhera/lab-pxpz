@@ -1,0 +1,7 @@
+from typing import Iterable 
+def capitalize_words(words: Iterable[str]) -> Iterable[str]: 
+    capitalize = lambda s: s[0].upper() + s[1:] if s else s
+
+    return map(capitalize, words)
+
+print(list(capitalize_words(["python", "java", "c++"]))) 

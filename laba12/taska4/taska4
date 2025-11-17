@@ -1,0 +1,29 @@
+def validate_password(password: str) -> bool: 
+    def has_upper(s: str) -> bool:
+        return any(c.isupper() for c in s)
+    def has_digits(s: str) -> bool:
+        return any(c.isdigit()for c in s)
+    def is_long_enough(s: str) -> bool:
+        return True if len(s) >= 8 else False
+    def has_special_char(s: str) -> bool:
+        special_characters = "!@#$%^&*()-+"
+        return any(c in special_characters for c in s)
+    def no_spaces(s: str) -> bool:
+        return not any(c.isspace() for c in s)
+    if (has_upper(password) and has_digits(password) and
+        is_long_enough(password) and has_special_char(password) and
+        no_spaces(password)):
+        return True
+    else:
+        results = {
+            "has upper": has_upper(password),
+            "has digits": has_digits(password),
+            "is long enough": is_long_enough(password),
+            "has special char": has_special_char(password),
+            "no spaces": no_spaces(password)
+        }
+        for key, value in results.items():
+            print(f"{key}: {value}")
+        return False
+print(validate_password("StrongPass4!")) 
+

@@ -1,0 +1,4 @@
+def filter_long_words(words: list[str], length: int = 0) -> list[str]: 
+    return list(filter(lambda x: len(x) > length, words))
+print(filter_long_words(["a", "the", "code", "Python", "is", 
+"fun"], 4)) 

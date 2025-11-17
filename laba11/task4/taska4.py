@@ -10,7 +10,7 @@ def walk_tree(data: dict) -> Iterator[str]:
 tree1 = {"a": {"b": {"c": 1}}, "d": 2}
 print(list(walk_tree(tree1)))  
 
-'''- key = 'a', value = {"b": {"c": 1}}
+''' key = 'a', value = {"b": {"c": 1}}
 - yield 'a'
 -   value — словник → рекурсія:
 -       key = 'b', value = {"c": 1}

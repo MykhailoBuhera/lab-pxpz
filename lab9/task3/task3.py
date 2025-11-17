@@ -2,11 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, Text, END
 
 def check_balance_logic(expression: str) -> str:
-    """
-    Основна логіка перевірки балансу дужок.
-    Приймає рядок-вираз і повертає рядок-результат.
-    """
-
+    
     stack = []
     pairs = []
     is_balanced = True
@@ -53,10 +49,6 @@ def check_balance_logic(expression: str) -> str:
     return result_str
 
 def on_analyze_button_click():
-    """
-    Ця функція викликається при натискані на кнопку aналізувати
-    Вона зчитує фай викликає логіку та виводить результат у текстове поле.
-    """
     filepath = "task3/input.txt"
     
     try:
@@ -82,7 +74,6 @@ window = tk.Tk()
 window.title("Перевірка балансу дужок")
 window.geometry("500x350")
 
-# --- Створення віджетів ---
 frame_input = tk.Frame(window)
 frame_input.pack(pady=10)
 
